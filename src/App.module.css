@@ -1,0 +1,97 @@
+* {
+  box-sizing: content-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerContainer {
+  display: flex;
+  font-size: 15px;
+  margin: 20px 0px;
+}
+.headerContainer img {
+  position: absolute;
+}
+.headerContainer .titleMain {
+  margin-left: 10px;
+  color: #fff;
+  background-color: black;
+  padding: 0px 10px;
+  border-radius: 10px;
+  margin-left: 30px;
+  font-weight: 200;
+}
+
+.displayCalculator {
+  width: 350px;
+  height: 500px;
+  flex: 1;
+  border: 1px solid black;
+  border-radius: 1px;
+  background-color: #404040;
+}
+.historic {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 5px 20px;
+  color: #fff;
+}
+.displayCalculator .result {
+  height: 60px;
+  border: 1px solid black;
+  margin: 0px 15px;
+  border-radius: 5px;
+  background: linear-gradient(#DFE0D8, #D9DACA, #D9DACA, #DFE0D8);
+  font-size: 45px;
+  display: flex;
+  justify-content: right;
+  padding: 0px 5px;
+  align-items: center;
+}
+
+.displayButtons {
+  display: flex;
+  flex: 1;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.containerDisplay {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  background-color: azure;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+footer {
+  display: flex;
+  font-size: 15px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+}
+footer h5 {
+  color: black;
+  margin-right: 10px;
+}
