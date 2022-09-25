@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.buttonsNumber {
+  flex: 1;
+  font-size: 20px;
+  padding: 15px;
+  font-weight: bold;
+  color: black;
+  border: 1px solid black;
+  width: 100%;
+  color: #fff;
+}
+
+.buttonsNumber:hover {
+  opacity: 0.5;
+}

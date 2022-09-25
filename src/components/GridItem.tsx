@@ -7,11 +7,10 @@ type Props = {
 
 export const GridCalculator = ({ item }:Props) => {
   return (
-    <div className={style.displayCalculator}>
-      <input className={style.buttonsNumber} 
-            type="button" value={item.button}
-            width={item.width} height={item.height}
-            style={{backgroundColor: item.color[0]}}
+    <div className={style.main}>
+      <input className={style.buttonsNumber} type="button" value={item.button} 
+
+      style={{backgroundImage: `linear-gradient(${item.color[0]},${item.color[1]})`}}
       />
     </div>
   )

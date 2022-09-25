@@ -7,7 +7,7 @@ import { GridCalculator } from './components/GridItem'
 
 
 const App = () => {
-  let [calculatorString , setCalculatorString] = useState<string>('40')
+  let [calculatorString , setCalculatorString] = useState<string>('')
   let [calculatorTotal , setCalculatorTotal] = useState<number>(0)
   
   
@@ -20,16 +20,17 @@ const App = () => {
       </div>
     
       <section className={style.displayCalculator}>
-        <div className={style.historic}>{calculatorString}</div>
-        <div className={style.result}>{calculatorTotal}</div>
-        <div className={style.displayButtons}>
+        <div className={style.displayTop}>
+          <div className={style.historic}>{calculatorString}</div>
+          <div className={style.result}>{calculatorTotal}</div>
+        </div>
 
+        <div className={style.displayBottom}>
           <div className={style.containerDisplay}>
             {buttonsCalculator.map((item , key) => (
-              <div key={key}>{item.button}</div>
+              <GridCalculator key={key} item={item}/>
             ))}
           </div>
-
         </div>
       </section>
 

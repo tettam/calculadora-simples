@@ -40,11 +40,18 @@
   border-radius: 1px;
   background-color: #404040;
 }
-.historic {
+.displayTop {
+  display: flex;
+  flex-direction: column;
+  margin : 10px 0px;
+  justify-content: center;
+}
+.displayCalculator .historic {
   display: flex;
   justify-content: right;
   align-items: center;
-  padding: 5px 20px;
+  padding: 0px 20px;
+  margin-bottom: 5px;
   color: #fff;
 }
 .displayCalculator .result {
@@ -60,19 +67,18 @@
   align-items: center;
 }
 
-.displayButtons {
-  display: flex;
-  flex: 1;
-  margin-top: 20px;
-  justify-content: center;
-  align-items: center;
+.displayBottom {
+  margin-top:  20px;
+  padding: 10px;
 }
+
 .containerDisplay {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   gap: 10px;
-  background-color: azure;
+  background-color: #404040;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -82,7 +88,7 @@
 footer {
   display: flex;
   font-size: 15px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   justify-content: center;
