@@ -28,13 +28,12 @@ export const buttonsCalculator: Buttons[] = [
 export const checkInputCalculator = (input:string):any => {
   switch (input) {
     case 'ce':
-      return 'ce'
-      break;
-    
     case 'c':
-      return 'c'
-      break;
-    
+    case '+':
+    case '-':
+    case 'x':
+    case '/':
+      return input
     default:
       break;
   }

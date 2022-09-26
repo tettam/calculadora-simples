@@ -8,21 +8,29 @@ import { GridCalculator } from './components/GridItem'
 
 const App = () => {
   let [calculatorHistory , setCalculatorHistory] = useState<string>('')
-  let [calculatorTotal , setCalculatorTotal] = useState<number | string>(5)
+  let [calculatorTotal , setCalculatorTotal] = useState<number>(0)
   
   const addInput = (input:string) => {
-    let checkInput = checkInputCalculator(input)
+    const checkInput = checkInputCalculator(input)
 
     if (checkInput == 'ce') {
-      setCalculatorHistory('')
+      setCalculatorHistory('') // Clear history
       return setCalculatorTotal(0)
     }
-    if(checkInput == 'c') {
+    if (checkInput == 'c') {
       return setCalculatorTotal(calculatorTotal = 0)
     }
+    if (checkInput == '+' || checkInput == '-' || checkInput == 'x' || checkInput == '/') {
+      setCalculatorHistory(calculatorHistory.concat(`  ${checkInput}  `))
+      return console.log('Digitou um operador')
+    } 
     setCalculatorHistory(calculatorHistory.concat(checkInput))
-    setCalculatorTotal(calculatorTotal = checkInput)
+    setCalculatorTotal(parseInt(checkInput))
+    
+    console.log('Digitou um numero')
   }
+
+
 
   return(
     <div className={style.main}>
