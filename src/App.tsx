@@ -2,23 +2,33 @@ import style from './App.module.css'
 import iconLogo from './assets/calculator.png'
 import iconGithub from './assets/github.png'
 import { MouseEventHandler, useState } from 'react'
-import { buttonsCalculator} from './helpers/calculator'
+import { buttonsCalculator , checkInputCalculator} from './helpers/calculator'
 import { GridCalculator } from './components/GridItem'
 
 
 const App = () => {
   let [calculatorHistory , setCalculatorHistory] = useState<string>('')
-  let [calculatorTotal , setCalculatorTotal] = useState<number>(0)
+  let [calculatorTotal , setCalculatorTotal] = useState<number | string>(5)
   
-  const addInput = (input:any) => {
-    setCalculatorHistory(calculatorHistory.concat(input))
+  const addInput = (input:string) => {
+    let checkInput = checkInputCalculator(input)
+
+    if (checkInput == 'ce') {
+      setCalculatorHistory('')
+      return setCalculatorTotal(0)
+    }
+    if(checkInput == 'c') {
+      return setCalculatorTotal(calculatorTotal = 0)
+    }
+    setCalculatorHistory(calculatorHistory.concat(checkInput))
+    setCalculatorTotal(calculatorTotal = checkInput)
   }
 
   return(
     <div className={style.main}>
       
       <div className={style.headerContainer}>
-        <img src={iconLogo} alt="" width={25} title='G - Flaticon'/>
+        <img src={iconLogo} alt="" width={25} title='Flaticon'/>
         <h2 className={style.titleMain}>Calculadora Simples</h2>
       </div>
     
@@ -31,7 +41,7 @@ const App = () => {
         <div className={style.displayBottom}>
           <div className={style.containerDisplay}>
 
-            {buttonsCalculator.map((item , key , onClick) => (
+            {buttonsCalculator.map((item , key) => (
               <GridCalculator 
                 key={key} 
                 item={item}
