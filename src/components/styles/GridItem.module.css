@@ -13,8 +13,11 @@
   border: 1px solid black;
   width: 100%;
   color: #fff;
+  cursor: pointer;
+  transition: all ease .5s;
 }
 
 .buttonsNumber:hover {
   opacity: 0.5;
 }
+
