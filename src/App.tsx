@@ -1,63 +1,45 @@
 import style from './App.module.css'
-import iconLogo from './assets/calculator.png'
 import iconGithub from './assets/github.png'
-import { MouseEvent , useState } from 'react'
-import { buttonsCalculator , checkInputCalculator} from './helpers/calculator'
+import iconLogo from './assets/calculator.png'
+
+import { useState , MouseEvent } from 'react'
 import { GridCalculator } from './components/GridItem'
+import { buttonsCalculator , checkInputCalculator} from './helpers/calculator'
 
 
 const App = () => {
-  let [calculatorHistory , setCalculatorHistory] = useState<string | any>('')
-  let [result , setResult] = useState<number>(0)
-  let [calculatorTotal , setCalculatorTotal] = useState<number>(0)
-  let [numbersSelect , setNumbersSelect] = useState<any>(0)
+  let [historic , setHistoric] = useState<string>()
+  let [totalResult , setTotalResult] = useState<number>(0)
+  let [selectedButton , setSelectedButton] = useState<string>()
+  let [selectedOperator , setSelectedOperator] = useState<string>()
+  let [resultOrInput , setResultOrInput] = useState<boolean>(true)
 
-  const addInput = (input:string) => {
-    const checkInput = checkInputCalculator(input)
 
-    if (checkInput == 'ce') {
-      setCalculatorHistory('') // Clear history
-      setNumbersSelect(0)
-      setCalculatorTotal(0)
-      return 
-    }
-    if (checkInput == 'c') {
-      setNumbersSelect(0)
-      return
-    }
-    if (checkInput == '+' || checkInput == '-' || checkInput == 'x' || checkInput == '/') {
-      setCalculatorHistory(calculatorHistory.concat(`  ${checkInput}  `))
-      switch (checkInput) {
-        case '+':
-          setCalculatorTotal(10)
-          console.log('somar', calculatorTotal)
-          break;
-        case '-':
-          setCalculatorTotal(calculatorTotal = calculatorTotal - numbersSelect)
-          break;  
-        case 'x':
-          setCalculatorTotal(calculatorTotal = calculatorTotal * numbersSelect)
-          break;
-        case '/':
-          setCalculatorTotal(calculatorTotal = calculatorTotal / numbersSelect)
-          break;
-        default: 'Error'
-          break;
-      }
-      setNumbersSelect(0)
-      return console.log(`Resultado da operação ${checkInput} `, calculatorTotal)
-    }
-
-    if ( checkInput == '=') {
-      setNumbersSelect(numbersSelect = calculatorTotal)
-      return
+  const addInput = (input:any) => {
+    switch (input) {
+      case '+':
+      case '-':
+      case 'x':
+      case '/':
+        selectedOperator = input
+        console.log(selectedOperator)
+        break;
+      case 'ce':
+        setResultOrInput(false)
+        setSelectedButton('')
+        selectedOperator = '0'
+        break;
+      case 'c':
+        setResultOrInput(true)
+        setHistoric('')
+        setSelectedButton('')
+        setSelectedOperator('')
+        setTotalResult(0)
+        break;
+      default:
+        break;
     }
     
-
-    setCalculatorHistory(calculatorHistory.concat(checkInput))       // historic calculator
-    setNumbersSelect(numbersSelect = parseInt(`${numbersSelect}${checkInput}`))  // salve numbers in an array
-    console.log('Numero selecionado ' , checkInput)
-    console.log('Numero total ', numbersSelect)
   }
 
   return(
@@ -70,18 +52,19 @@ const App = () => {
     
       <section className={style.displayCalculator}>
         <div className={style.displayTop}>
-          <div className={style.historic}>{calculatorHistory}</div>
-          <div className={style.result}>{numbersSelect}</div>
+          <div className={style.historic}>{historic}</div>
+          <div className={style.result}>{(resultOrInput) ? totalResult : selectedButton}</div>
         </div>
 
         <div className={style.displayBottom}>
           <div className={style.containerDisplay}>
 
-            {buttonsCalculator.map((item , key) => (
+            {buttonsCalculator.map((item , key ) => (
               <GridCalculator 
                 key={key} 
                 item={item}
-                onClick={e => {addInput(e.target.value)}} />
+                onClick={e => {addInput(e.target.value)}} 
+              />
             ))}
             
           </div>
