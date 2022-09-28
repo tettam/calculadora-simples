@@ -24,18 +24,3 @@ export const buttonsCalculator: Buttons[] = [
   {button:'0', color:['#999A9C','#000']},
   {button:',', color:['#999A9C','#000']},
 ]
-
-export const checkInputCalculator = (input:string):any => {
-  switch (input) {
-    case 'ce':
-    case 'c':
-    case '+':
-    case '-':
-    case 'x':
-    case '/':
-      return input
-    default:
-      break;
-  }
-  return input
-}

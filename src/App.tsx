@@ -4,13 +4,14 @@ import iconLogo from './assets/calculator.png'
 
 import { useState , MouseEvent } from 'react'
 import { GridCalculator } from './components/GridItem'
-import { buttonsCalculator , checkInputCalculator} from './helpers/calculator'
+import { buttonsCalculator } from './helpers/calculator'
 
 
 const App = () => {
-  let [historic , setHistoric] = useState<string>()
+  let [historic , setHistoric] = useState<string>('')
   let [totalResult , setTotalResult] = useState<number>(0)
-  let [selectedButton , setSelectedButton] = useState<string>()
+  let [selectedButton , setSelectedButton] = useState<any>('0')
+  let [selectedNumber , setSelectedNumber] = useState<number>()
   let [selectedOperator , setSelectedOperator] = useState<string>()
   let [resultOrInput , setResultOrInput] = useState<boolean>(true)
 
@@ -22,21 +23,32 @@ const App = () => {
       case 'x':
       case '/':
         selectedOperator = input
-        console.log(selectedOperator)
+        setResultOrInput(resultOrInput = true)
+        setSelectedNumber(selectedNumber = parseInt(selectedButton))
+        setSelectedButton(selectedButton = '')                             //Reset seletect number
+        setHistoric(historic = `${historic}${selectedNumber}  ${input}  `) //Save history
+        setTotalResult(totalResult = parseInt(`${totalResult}${selectedOperator}${selectedNumber}`))
+        console.log('totalResult ', totalResult)
+        console.log('operator ', selectedOperator)
+        console.log('numero ', selectedNumber)
         break;
       case 'ce':
-        setResultOrInput(false)
-        setSelectedButton('')
-        selectedOperator = '0'
+        setResultOrInput(resultOrInput = true)
+        setTotalResult(0)
         break;
       case 'c':
-        setResultOrInput(true)
         setHistoric('')
         setSelectedButton('')
         setSelectedOperator('')
+        setResultOrInput(true)
         setTotalResult(0)
         break;
+      case '=':
+        console.log(input)
+        break;
       default:
+        setResultOrInput(false)
+        setSelectedButton(selectedButton = selectedButton.concat(input))
         break;
     }
     
