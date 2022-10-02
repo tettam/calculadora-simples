@@ -10,50 +10,100 @@ import { buttonsCalculator } from './helpers/calculator'
 const App = () => {
   let [historic , setHistoric] = useState<string>('')
   let [totalResult , setTotalResult] = useState<number>(0)
-  let [selectedButton , setSelectedButton] = useState<any>('0')
+  let [selectedButton , setSelectedButton] = useState<any>('')
   let [selectedNumber , setSelectedNumber] = useState<number>()
   let [selectedOperator , setSelectedOperator] = useState<string>()
   let [resultOrInput , setResultOrInput] = useState<boolean>(true)
 
+  const checkOperators = (input:any):void => {
+    selectedOperator != input 
+      ? setSelectedOperator(selectedOperator = totalResult.toString()) 
+      : setSelectedOperator(selectedOperator = input) 
+    resultCalculator()
+    console.log('Selecionado ', selectedButton)
+    console.log('Input ', input)
+    console.log('Resultado ', totalResult)
+  }
 
-  const addInput = (input:any) => {
+  const inputNumber = (input:string):void => {
+    setSelectedButton(selectedButton = `${selectedButton}${input}`)
+  }
+
+  const numberFloat = (input:string):void => {
+    console.log('Numero decimal')
+  }
+
+  const resetInput = ():void => {
+    setSelectedButton('')
+    console.log('Numero digitado apagado')
+  }
+  
+  const resetAll = ():void => {
+    setHistoric('')
+    setTotalResult(0)
+    setSelectedButton('')
+    console.log('Historico apagado')
+  }
+
+  const resultCalculator = ():void => {
+    setSelectedNumber(selectedNumber = parseInt(selectedButton))
+    if(selectedOperator == '+'){
+      setTotalResult(totalResult + selectedNumber)
+    } else if(selectedOperator == '-') {
+      setTotalResult(totalResult - selectedNumber)
+    } else if(selectedOperator == 'x'){
+      setTotalResult(totalResult * selectedNumber)
+    } else if(selectedOperator == '/') {
+      setTotalResult(totalResult / selectedButton)
+    }
+    
+    setSelectedButton('')
+  }
+
+  const historicAll = (input:string , check:string):void => {
+    if(check == 'operators') {
+      setHistoric(historic = `${historic}   ${input}   `)
+    } else {
+      setHistoric(historic = `${historic}${input}`)
+    }
+  }
+
+  const showResultOrTotal = (trueOrfalse:boolean) =>{
+    trueOrfalse == true ? setResultOrInput(true) :  setResultOrInput(false)
+  }
+
+  const checkInput = (input:any) => {  
     switch (input) {
       case '+':
       case '-':
       case 'x':
       case '/':
-        selectedOperator = input
-        setResultOrInput(resultOrInput = true)
-        setSelectedNumber(selectedNumber = parseInt(selectedButton))
-        setSelectedButton(selectedButton = '')                             //Reset seletect number
-        setHistoric(historic = `${historic}${selectedNumber}  ${input}  `) //Save history
-        setTotalResult(totalResult = parseInt(`${totalResult}${selectedOperator}${selectedNumber}`))
-        console.log('totalResult ', totalResult)
-        console.log('operator ', selectedOperator)
-        console.log('numero ', selectedNumber)
+        historicAll(input , 'operators')
+        checkOperators(input)
+        resultCalculator()
+        showResultOrTotal(true)
         break;
       case 'ce':
-        setResultOrInput(resultOrInput = true)
-        setTotalResult(0)
+        resetInput()
         break;
       case 'c':
-        setHistoric('')
-        setSelectedButton('')
-        setSelectedOperator('')
-        setResultOrInput(true)
-        setTotalResult(0)
+        resetAll()
+        showResultOrTotal(true)
         break;
       case '=':
-        console.log(input)
+        resultCalculator()
+        showResultOrTotal(true)
         break;
+      case ',':
+        numberFloat(input)
+        break
       default:
-        setResultOrInput(false)
-        setSelectedButton(selectedButton = selectedButton.concat(input))
-        break;
+        historicAll(input , 'number')
+        inputNumber(input)
+        showResultOrTotal(false)
+        break;      
     }
-    
   }
-
   return(
     <div className={style.main}>
       
@@ -75,7 +125,7 @@ const App = () => {
               <GridCalculator 
                 key={key} 
                 item={item}
-                onClick={e => {addInput(e.target.value)}} 
+                onClick={e => {checkInput(e.target.value)}} 
               />
             ))}
             
