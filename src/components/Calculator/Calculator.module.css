@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main {
+  background-color: #edf5f9;
+  display: grid;
+  grid-template-columns: repeat( 4 , 1fr);
+  grid-template-rows: repeat(5 , 1fr);
+  gap: 5px;
+  padding: 5px;
+}
+
+.inputButton {
+  max-width: 300px;
+  min-height: 70px;
+  background-color: #fff;
+  border: 1px solid #dee8ea;
+  font-size: 15px;
+  flex: 1;
+}
+
+.inputButton:hover {
+  background-color: #d1edf8;
+  cursor: pointer;
+}
+

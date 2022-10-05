@@ -1,106 +1,49 @@
 * {
-  box-sizing: content-box;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #edf5f9;
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  max-width: 700px;
   margin: auto;
-  justify-content: center;
-  align-items: center;
+  margin-top: 20px;
+  border: none;
+  max-width: 300px;
 }
 
-.headerContainer {
+header .headerTitle {
   display: flex;
-  text-align: center;
   align-items: center;
-  font-size: 15px;
-  margin: 20px 0px;
 }
-.headerContainer img {
-  position: absolute;
+.headerTitle img {
+  margin-right: 10px;
 }
-.headerContainer .titleMain {
-  margin-left: 10px;
-  color: #fff;
-  background-color: black;
-  padding: 0px 10px;
-  border-radius: 10px;
-  margin-left: 30px;
+.headerTitle h2 {
   font-weight: 600;
-  font-size: 25px;
 }
-
 .displayCalculator {
-  width: 350px;
-  height: 500px;
-  flex: 1;
-  border: 1px solid black;
-  border-radius: 1px;
-  background-color: #404040;
-}
-.displayTop {
-  display: flex;
-  flex-direction: column;
-  margin : 10px 0px;
-  justify-content: center;
-}
-.displayCalculator .historic {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  padding: 0px 20px;
-  margin-bottom: 5px;
-  color: #fff;
-}
-.displayCalculator .result {
-  height: 60px;
-  border: 1px solid black;
-  margin: 0px 15px;
-  border-radius: 5px;
-  background: linear-gradient(#DFE0D8, #D9DACA, #D9DACA, #DFE0D8);
-  font-size: 45px;
-  display: flex;
-  justify-content: right;
-  padding: 0px 5px;
-  align-items: center;
+  border: 1px solid red;
 }
 
-.displayBottom {
-  margin-top:  20px;
-  padding: 10px;
-}
-
-.containerDisplay {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  gap: 10px;
-  background-color: #404040;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
 
 footer {
   display: flex;
-  font-size: 15px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  position: absolute;
   justify-content: center;
   align-items: center;
   margin: auto;
-  text-align: center;
   padding: 10px;
+  bottom: 0;
+  width: 100%;
 }
+
 footer h5 {
-  color: black;
+  font-weight: 700;
   margin-right: 10px;
 }
+

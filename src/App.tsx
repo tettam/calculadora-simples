@@ -1,137 +1,64 @@
 import style from './App.module.css'
-import iconGithub from './assets/github.png'
-import iconLogo from './assets/calculator.png'
-
-import { useState , MouseEvent } from 'react'
-import { GridCalculator } from './components/GridItem'
-import { buttonsCalculator } from './helpers/calculator'
+import { Calculator } from './components/Calculator'
 
 
-const App = () => {
-  let [historic , setHistoric] = useState<string>('')
-  let [totalResult , setTotalResult] = useState<number>(0)
-  let [selectedButton , setSelectedButton] = useState<any>('')
-  let [selectedNumber , setSelectedNumber] = useState<number>()
-  let [selectedOperator , setSelectedOperator] = useState<string>()
-  let [resultOrInput , setResultOrInput] = useState<boolean>(true)
+import iconCalc from './assets/calculator.png'
+import  iconGithub  from './assets/github.png'
 
-  const checkOperators = (input:any):void => {
-    selectedOperator != input 
-      ? setSelectedOperator(selectedOperator = totalResult.toString()) 
-      : setSelectedOperator(selectedOperator = input) 
-    resultCalculator()
-    console.log('Selecionado ', selectedButton)
-    console.log('Input ', input)
-    console.log('Resultado ', totalResult)
+
+
+const App = () => { 
+  const onDigitNumber = () => {
+    console.log('Numero')
   }
 
-  const inputNumber = (input:string):void => {
-    setSelectedButton(selectedButton = `${selectedButton}${input}`)
+  const onClearResult = () => {
+    console.log('Limpar')
   }
 
-  const numberFloat = (input:string):void => {
-    console.log('Numero decimal')
+  const onDigitEqual = () => {
+    console.log('Igual')
   }
 
-  const resetInput = ():void => {
-    setSelectedButton('')
-    console.log('Numero digitado apagado')
-  }
-  
-  const resetAll = ():void => {
-    setHistoric('')
-    setTotalResult(0)
-    setSelectedButton('')
-    console.log('Historico apagado')
+  const onDigitOperator = () => {
+    console.log('Operador')
   }
 
-  const resultCalculator = ():void => {
-    setSelectedNumber(selectedNumber = parseInt(selectedButton))
-    if(selectedOperator == '+'){
-      setTotalResult(totalResult + selectedNumber)
-    } else if(selectedOperator == '-') {
-      setTotalResult(totalResult - selectedNumber)
-    } else if(selectedOperator == 'x'){
-      setTotalResult(totalResult * selectedNumber)
-    } else if(selectedOperator == '/') {
-      setTotalResult(totalResult / selectedButton)
-    }
-    
-    setSelectedButton('')
+  const onDigitPoint = () => {
+    console.log('Ponto')
   }
 
-  const historicAll = (input:string , check:string):void => {
-    if(check == 'operators') {
-      setHistoric(historic = `${historic}   ${input}   `)
-    } else {
-      setHistoric(historic = `${historic}${input}`)
-    }
-  }
-
-  const showResultOrTotal = (trueOrfalse:boolean) =>{
-    trueOrfalse == true ? setResultOrInput(true) :  setResultOrInput(false)
-  }
-
-  const checkInput = (input:any) => {  
-    switch (input) {
-      case '+':
-      case '-':
-      case 'x':
-      case '/':
-        historicAll(input , 'operators')
-        checkOperators(input)
-        resultCalculator()
-        showResultOrTotal(true)
-        break;
-      case 'ce':
-        resetInput()
-        break;
-      case 'c':
-        resetAll()
-        showResultOrTotal(true)
-        break;
-      case '=':
-        resultCalculator()
-        showResultOrTotal(true)
-        break;
-      case ',':
-        numberFloat(input)
-        break
-      default:
-        historicAll(input , 'number')
-        inputNumber(input)
-        showResultOrTotal(false)
-        break;      
-    }
-  }
   return(
-    <div className={style.main}>
-      
-      <div className={style.headerContainer}>
-        <img src={iconLogo} alt="" width={25} title='Flaticon'/>
-        <h2 className={style.titleMain}>Calculadora Simples</h2>
-      </div>
-    
-      <section className={style.displayCalculator}>
-        <div className={style.displayTop}>
-          <div className={style.historic}>{historic}</div>
-          <div className={style.result}>{(resultOrInput) ? totalResult : selectedButton}</div>
-        </div>
-
-        <div className={style.displayBottom}>
-          <div className={style.containerDisplay}>
-
-            {buttonsCalculator.map((item , key ) => (
-              <GridCalculator 
-                key={key} 
-                item={item}
-                onClick={e => {checkInput(e.target.value)}} 
-              />
-            ))}
-            
+    <div>
+      <div className={style.main}>
+        <header>
+          <div className={style.headerTitle}>
+            <img src={iconCalc} alt="" width={25}/>
+            <h2>Calculadora Padrão</h2>
           </div>
-        </div>
-      </section>
+        </header>
+
+          <div className={style.displayCalculator}>
+            <div className={style.infoMore}>
+              <div className={style.time}>time</div>
+              <div className={style.date}>data</div>
+            </div>
+            <div className={style.historic}>123</div>
+            <div className={style.calculatorNumbers}>
+            ...
+            </div>
+          </div>
+
+          <div className={style.displayNumbers}>
+            <Calculator 
+              onDigitNumber={onDigitNumber}
+              onClearResult={onClearResult}
+              onDigitEqual={onDigitEqual}
+              onDigitOperator={onDigitOperator}
+              onDigitPoint={onDigitPoint}
+            />
+          </div>
+      </div>
 
       <footer>
         <h5>Desenvolvimento por Marco Tettamanti</h5>
