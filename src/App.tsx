@@ -59,7 +59,7 @@ const App = () => {
   }
 
   return(
-    <div>
+    <div className={style.container}>
       <div className={style.main}>
         <header>
           <div className={style.headerTitle}>
