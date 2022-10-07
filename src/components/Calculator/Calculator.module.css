@@ -21,9 +21,10 @@
   border: 1px solid #dee8ea;
   font-size: 15px;
   flex: 1;
+  cursor: pointer;
 }
 
-.inputButton:hover {
+.inputButton:active {
   background-color: #d1edf8;
   cursor: pointer;
 }

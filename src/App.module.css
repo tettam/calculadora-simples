@@ -11,8 +11,17 @@
   flex-direction: column;
   margin: auto;
   margin-top: 20px;
+  min-width: 350px;
+  max-width: 650px;
   border: none;
-  max-width: 300px;
+  margin-top: 50px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+header {
+  margin: 20px;
 }
 
 header .headerTitle {
@@ -26,7 +35,27 @@ header .headerTitle {
   font-weight: 600;
 }
 .displayCalculator {
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+.infoMore {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin: 5px;
+}
+.historic{
+  display: flex;
+  justify-content: right;
+  margin: 5px;
+  font-size: 17px;
+}
+.calculatorNumbers{
+  display: flex;
+  justify-content: right;
+  font-size: 40px;
+  font-weight: 600;
+  margin: 5px;
 }
 
 

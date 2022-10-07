@@ -1,18 +1,42 @@
 import style from './App.module.css'
-import { Calculator } from './components/Calculator'
+import { Calculator , Buttons} from './components/Calculator'
 
 
 import iconCalc from './assets/calculator.png'
 import  iconGithub  from './assets/github.png'
-
+import { useState } from 'react'
 
 
 const App = () => { 
-  const onDigitNumber = () => {
-    console.log('Numero')
+  const [result , setResult] = useState<number>(0)
+  const [newResult , setNewResult] = useState<number>(0)
+  const [historic , setHistoric] = useState<string>('')
+
+  const calculate = (operators:string) => {
+
+    switch (operators) {
+      case '+':
+        setNewResult(newResult + result)
+        console.log('Novo resultado ', newResult)
+        break;
+    
+      default:
+        break;
+    }
+  }
+  
+
+  const onDigitNumber = (digit:any):void => {
+      setResult(parseInt(`${result}${digit}`))
+      console.log('Resultado ', result)
+    
+    
   }
 
   const onClearResult = () => {
+    setResult(0)
+    setHistoric('')
+    setNewResult(0)
     console.log('Limpar')
   }
 
@@ -20,12 +44,18 @@ const App = () => {
     console.log('Igual')
   }
 
-  const onDigitOperator = () => {
-    console.log('Operador')
+  const onDigitOperator = (operators:any):void => {
+    calculate(operators)
+    historicFull(operators)
+    console.log(operators)
   }
 
   const onDigitPoint = () => {
     console.log('Ponto')
+  }
+
+  const historicFull = (operators:Buttons) => {
+    setHistoric(`  ${result} ${operators}  `)
   }
 
   return(
@@ -43,9 +73,9 @@ const App = () => {
               <div className={style.time}>time</div>
               <div className={style.date}>data</div>
             </div>
-            <div className={style.historic}>123</div>
+            <div className={style.historic}>{historic}</div>
             <div className={style.calculatorNumbers}>
-            ...
+            {result}
             </div>
           </div>
 
