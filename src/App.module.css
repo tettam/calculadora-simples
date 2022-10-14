@@ -7,11 +7,13 @@
 }
 
 .container {
-  margin-top: 50px;
+  margin: 50px
 }
 
 .main {
   display: flex;
+  justify-content: center;
+  text-align: center;
   flex-direction: column;
   margin: auto;
   border: 1px solid black;
@@ -61,12 +63,10 @@ header .headerTitle {
 
 footer {
   display: flex;
-  position: fixed;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 20px;
-  bottom: 0px;
   width: 100%;
 }
 
