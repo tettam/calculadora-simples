@@ -7,7 +7,7 @@
 }
 
 .container {
-  margin: 50px;
+  margin-top: 50px;
 }
 
 .main {
@@ -59,20 +59,19 @@ header .headerTitle {
   margin: 5px;
 }
 
-
-
 footer {
   display: flex;
-  position: absolute;
+  position: fixed;
   justify-content: center;
   align-items: center;
-  margin: auto;
-  padding: 10px;
-  bottom: 0;
+  text-align: center;
+  padding: 20px;
+  bottom: 0px;
   width: 100%;
 }
 
 footer h5 {
+  font-size: 15px;
   font-weight: 700;
   margin-right: 10px;
 }

@@ -10,52 +10,64 @@ import { useState } from 'react'
 const App = () => { 
   const [result , setResult] = useState<number>(0)
   const [newResult , setNewResult] = useState<number>(0)
-  const [historic , setHistoric] = useState<string>('')
-
-  const calculate = (operators:string) => {
-
-    switch (operators) {
+  const [operatorInput , setOperatorInput] = useState<string>('')
+  const [showResultOperators , setShowResultOperators] = useState<boolean>(false)//true(newResult) false(result)
+                                                                                 
+  const calculate = () => {
+    let opNumber = newResult
+    switch (operatorInput) {
       case '+':
-        setNewResult(newResult + result)
-        console.log('Novo resultado ', newResult)
+        opNumber += result
         break;
-    
+      case '-':
+        opNumber -= result
+        break;
+      case 'x':
+        opNumber *= result
+        break;
+      case '/':
+        opNumber /= result
+        break;
       default:
+        console.log('Error')
         break;
     }
+    setNewResult(opNumber)
+    console.log(opNumber)
+    console.log('calculado' , newResult)
+    console.log('resultado', result)
+    
   }
   
-
   const onDigitNumber = (digit:any):void => {
       setResult(parseInt(`${result}${digit}`))
-      console.log('Resultado ', result)
-    
-    
+      setShowResultOperators(false) 
   }
 
   const onClearResult = () => {
     setResult(0)
-    setHistoric('')
     setNewResult(0)
-    console.log('Limpar')
-  }
-
-  const onDigitEqual = () => {
-    console.log('Igual')
+    setShowResultOperators(false)
   }
 
   const onDigitOperator = (operators:any):void => {
-    calculate(operators)
-    historicFull(operators)
-    console.log(operators)
+    setOperatorInput(operators)
+    setNewResult(result)
+    setResult(0)
+  }
+
+  const positiveOrNegative = () => {
+    setResult(result * -1)
+    setShowResultOperators(false)
+  }
+
+  const onDigitEqual = () => {
+    calculate()
+    setShowResultOperators(true)
   }
 
   const onDigitPoint = () => {
-    console.log('Ponto')
-  }
-
-  const historicFull = (operators:Buttons) => {
-    setHistoric(`  ${result} ${operators}  `)
+    console.log('ponto')
   }
 
   return(
@@ -73,9 +85,9 @@ const App = () => {
               <div className={style.time}>time</div>
               <div className={style.date}>data</div>
             </div>
-            <div className={style.historic}>{historic}</div>
+            <div className={style.historic}></div>
             <div className={style.calculatorNumbers}>
-            {result}
+            {showResultOperators ? newResult : result}
             </div>
           </div>
 
@@ -86,6 +98,7 @@ const App = () => {
               onDigitEqual={onDigitEqual}
               onDigitOperator={onDigitOperator}
               onDigitPoint={onDigitPoint}
+              positiveOrNegative={positiveOrNegative}
             />
           </div>
       </div>

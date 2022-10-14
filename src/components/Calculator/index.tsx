@@ -12,6 +12,7 @@ interface CalculatorProps  {
   onClearResult: () => void
   onDigitEqual: () => void
   onDigitPoint: () => void
+  positiveOrNegative: () => void
 }
 
 export const Calculator:FunctionComponent<CalculatorProps> = ({
@@ -19,13 +20,14 @@ export const Calculator:FunctionComponent<CalculatorProps> = ({
   onDigitOperator,
   onDigitEqual,
   onDigitPoint,
-  onClearResult
+  onClearResult,
+  positiveOrNegative
 }) => {
   
   return (
     <div className={style.main}>
       <input className={style.inputButton} type="button" value={'C'}  onClick={onClearResult}/>
-      <input className={style.inputButton} type="button" value={'+/-'} />
+      <input className={style.inputButton} type="button" value={'+/-'} onClick={positiveOrNegative}/>
       <input className={style.inputButton} type="button" value={'÷'} onClick={() => onDigitOperator('/')}/>
       <input className={style.inputButton} type="button" value={'x'} onClick={() => onDigitOperator('x')}/>
       <input className={style.inputButton} type="button" value={7} onClick={() => onDigitNumber(7)}/>
